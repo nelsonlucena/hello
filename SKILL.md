@@ -29,10 +29,9 @@ Never design with flat or equal visual weight across elements.
 
 ### Format Rules
 
-- **Primary canvas**: 9:16 vertical (1080×1920px) for Stories/Reels — **default for all generations**;
-  critical content must stay within the 1080×1350px safe zone (centre of frame)
-- **Secondary canvas**: 1:1 square (1080×1080px) for feed — use only when user requests or when the
-  brief explicitly calls for a feed-only format
+- **Primary canvas**: 1:1 square (1080×1080px) for feed — **default for all generations**
+- **Secondary canvas**: 9:16 vertical (1080×1920px) for Stories/Reels — use only when user requests
+  or when the brief explicitly calls for vertical format; critical content in 1080×1350px safe zone
 - Text on image: **maximum 20% of the frame**; always with contrast-boosting shadow or overlay
 - **Typography**: use brand-specified typefaces first (Sora/Inter for SaudApp, product page fonts
   for other brands); if brand has no typeface spec, prefer humanist sans (DM Sans, Plus Jakarta Sans,
@@ -487,17 +486,17 @@ For each concept NN × variation MM:
 1. Build prompt from brief: scene + copy overlays + brand visual description + framework style cues.
 2. Append BRAND_LOCK + AESTHETIC_LOCK to every prompt.
 3. If the brief features any person/face, also append PEOPLE_LOCK.
-4. Aspect ratio: `"9:16"` for all generations (default). Use `"1:1"` only when the brief
-   explicitly calls for feed-only format or the user requests square.
+4. Aspect ratio: `"1:1"` for all generations (default). Use `"9:16"` only when the brief
+   explicitly calls for Stories/Reels format or the user requests vertical.
 5. Run:
 ```bash
 ~/.claude/skills/static-remix/scripts/gemini-image-ref.sh \
   "$PROMPT" \
-  "9:16" \
+  "1:1" \
   "$RUN_DIR/production/concept_$(printf '%02d' $NN)_var_$(printf '%02d' $MM).png" \
   "$RUN_DIR/product_photo.jpg"
 ```
-(Replace `"9:16"` with `"1:1"` only if user requested feed-square format.)
+(Replace `"1:1"` with `"9:16"` only if user requested Stories/Reels vertical format.)
 6. On exit code 1: log to `<RUN_DIR>/retry_queue.txt`, continue. Retry all queued items after main loop.
 7. After each success: print `[NN/TOTAL] concept_NN_var_MM.png ✓`
 
