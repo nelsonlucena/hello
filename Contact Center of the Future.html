@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Center of the Future — Chubb COG</title>
+<style>
+  :root {
+    --paper: #F4F1EA;
+    --paper-2: #ECE7DB;
+    --ink: #211C17;
+    --ink-soft: #4A4339;
+    --ink-mute: #7C7264;
+    --hair: #D6CEBE;
+    --hair-strong: #BFB5A1;
+    --ground: #1A1612;
+    --ground-2: #221D18;
+    --accent: #8E2A2A;      /* oxblood */
+    --accent-bright: #B23139; /* crimson for figures */
+    --accent-soft: #F0E2DE;
+
+    --type-display: 138px;
+    --type-figure: 128px;
+    --type-title: 74px;
+    --type-subtitle: 42px;
+    --type-lead: 34px;
+    --type-body: 28px;
+    --type-small: 23px;
+    --type-eyebrow: 19px;
+
+    --pad-x: 120px;
+    --pad-top: 78px;
+    --pad-bottom: 72px;
+
+    --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #000; }
+  deck-stage:not(:defined) { visibility: hidden; }
+
+  section {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    padding: var(--pad-top) var(--pad-x) var(--pad-bottom);
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ---------- chrome ---------- */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--hair-strong);
+    padding-bottom: 18px;
+    flex: 0 0 auto;
+  }
+  .topbar .eyebrow {
+    font-size: var(--type-eyebrow);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .topbar .eyebrow .num { color: var(--accent); font-weight: 700; }
+  .topbar .brand {
+    font-size: var(--type-eyebrow);
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink);
+    display: flex;
+    gap: 18px;
+    align-items: baseline;
+    white-space: nowrap;
+  }
+  .topbar .brand .pg { color: var(--ink-mute); font-weight: 400; letter-spacing: 0.16em; }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-top: 1px solid var(--hair);
+    padding-top: 16px;
+    margin-top: auto;
+    flex: 0 0 auto;
+    font-size: 16px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    font-weight: 500;
+  }
+
+  /* ---------- body building blocks ---------- */
+  .kicker {
+    font-size: var(--type-eyebrow);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .headline {
+    font-size: var(--type-title);
+    font-weight: 700;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin: 0;
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+  .standfirst {
+    font-size: var(--type-lead);
+    line-height: 1.34;
+    font-weight: 300;
+    color: var(--ink-soft);
+    max-width: 60ch;
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .body {
+    font-size: var(--type-body);
+    line-height: 1.42;
+    font-weight: 300;
+    color: var(--ink-soft);
+    text-wrap: pretty;
+  }
+
+  .content { flex: 1 1 auto; display: flex; flex-direction: column; padding-top: 44px; min-height: 0; }
+
+  /* ---------- tables ---------- */
+  table.d { width: 100%; border-collapse: collapse; }
+  table.d th {
+    text-align: left;
+    font-size: var(--type-small);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--ink-mute);
+    padding: 0 28px 16px 0;
+    border-bottom: 2px solid var(--ink);
+    vertical-align: bottom;
+  }
+  table.d td {
+    font-size: var(--type-body);
+    font-weight: 300;
+    color: var(--ink-soft);
+    padding: 22px 28px 22px 0;
+    border-bottom: 1px solid var(--hair);
+    vertical-align: top;
+    line-height: 1.32;
+  }
+  table.d td:last-child, table.d th:last-child { padding-right: 0; }
+  table.d .lead { font-weight: 500; color: var(--ink); }
+  table.d .metric { font-weight: 700; color: var(--accent); white-space: nowrap; }
+  table.d.tight td { padding: 15px 24px 15px 0; font-size: var(--type-small); }
+  table.d.tight th { padding-bottom: 13px; }
+
+  /* ---------- dark / divider ---------- */
+  section.dark { background: var(--ground); color: var(--paper); }
+  section.dark .topbar { border-color: rgba(244,241,234,0.22); }
+  section.dark .topbar .eyebrow { color: rgba(244,241,234,0.7); }
+  section.dark .topbar .eyebrow .num,
+  section.dark .kicker { color: var(--accent-bright); }
+  section.dark .topbar .brand { color: var(--paper); }
+  section.dark .topbar .brand .pg { color: rgba(244,241,234,0.5); }
+  section.dark .footer { border-color: rgba(244,241,234,0.16); color: rgba(244,241,234,0.5); }
+  section.dark .standfirst { color: rgba(244,241,234,0.82); }
+
+  /* ---------- pillar / column grids ---------- */
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .grid-4 > div { padding: 0 36px; border-left: 1px solid var(--hair-strong); }
+  .grid-4 > div:first-child { padding-left: 0; border-left: none; }
+  .grid-4 > div:last-child { padding-right: 0; }
+  .pillar-no { font-size: var(--type-small); font-weight: 700; letter-spacing: 0.1em; color: var(--accent); }
+  .pillar-h { font-size: 30px; font-weight: 700; line-height: 1.06; margin: 16px 0 18px; letter-spacing: -0.01em; }
+  .pillar-b { font-size: 22px; line-height: 1.4; font-weight: 300; color: var(--ink-soft); }
+  section.dark .grid-4 > div { border-color: rgba(244,241,234,0.2); }
+  section.dark .pillar-no { color: var(--accent-bright); }
+  section.dark .pillar-b { color: rgba(244,241,234,0.78); }
+
+  /* ---------- big figures ---------- */
+  .figrow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .figrow > div { padding: 0 44px; border-left: 1px solid var(--hair-strong); }
+  .figrow > div:first-child { padding-left: 0; border-left: none; }
+  .fig { font-size: var(--type-figure); font-weight: 700; line-height: 0.9; letter-spacing: -0.04em; color: var(--accent); }
+  .fig-l { font-size: 26px; font-weight: 700; letter-spacing: 0.02em; margin-top: 22px; color: var(--ink); }
+  .fig-s { font-size: 21px; font-weight: 300; line-height: 1.35; color: var(--ink-mute); margin-top: 8px; }
+  section.dark .figrow > div { border-color: rgba(244,241,234,0.2); }
+  section.dark .fig { color: var(--accent-bright); }
+  section.dark .fig-l { color: var(--paper); }
+  section.dark .fig-s { color: rgba(244,241,234,0.6); }
+
+  /* ---------- contents ---------- */
+  .toc-item { display: flex; align-items: baseline; gap: 32px; padding: 26px 0; border-bottom: 1px solid var(--hair); }
+  .toc-n { font-size: 34px; font-weight: 700; color: var(--accent); letter-spacing: -0.01em; min-width: 1.4em; }
+  .toc-t { font-size: 36px; font-weight: 500; color: var(--ink); letter-spacing: -0.01em; }
+
+  /* ---------- roadmap / deliverables ---------- */
+  .rmtarget { font-size: 21px; font-weight: 600; color: var(--ink); padding-left: 18px; position: relative; line-height: 1.25; }
+  .rmtarget::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 8px; height: 8px; background: var(--accent); }
+  .ph-tag { font-size: var(--type-small); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; color: var(--accent); padding-bottom: 14px; border-bottom: 2px solid var(--ink); margin-bottom: 22px; }
+  ul.dlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 16px; }
+  ul.dlist li { font-size: 21px; line-height: 1.34; font-weight: 300; color: var(--ink-soft); padding-left: 22px; position: relative; }
+  ul.dlist li::before { content: "→"; position: absolute; left: 0; top: 0; color: var(--accent); font-weight: 600; }
+
+  /* ---------- use case table ---------- */
+  table.d.uc td { padding: 16px 24px 16px 0; font-size: 21px; }
+  table.d.uc th { padding-bottom: 13px; }
+  table.d.uc .lob { font-weight: 700; color: var(--accent); font-size: 19px; letter-spacing: 0.04em; }
+  table.d.uc .metric { font-size: 20px; line-height: 1.25; white-space: normal; }
+
+  /* ---------- bars & layers ---------- */
+  .bar-row { display: grid; grid-template-columns: 200px 1fr 64px; align-items: center; gap: 18px; padding: 13px 0; }
+  .bar-l { font-size: 21px; font-weight: 500; color: var(--ink); }
+  .bar-track { height: 22px; background: var(--paper-2); border: 1px solid var(--hair-strong); }
+  .bar-fill { height: 100%; background: var(--accent); }
+  .bar-v { font-size: 24px; font-weight: 700; color: var(--accent); text-align: right; }
+  .layer { display: flex; gap: 18px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--hair); }
+  .layer-n { font-size: 21px; font-weight: 700; color: var(--accent); min-width: 1.6em; }
+  .layer-h { font-size: 25px; font-weight: 600; color: var(--ink); line-height: 1.1; }
+  .layer-b { font-size: 20px; font-weight: 300; color: var(--ink-mute); margin-top: 4px; }
+
+  /* ---------- severity & governance ---------- */
+  .sev { font-weight: 700; font-size: 19px; letter-spacing: 0.08em; text-transform: uppercase; white-space: nowrap; }
+  .sev-h { color: var(--accent); }
+  .sev-m { color: #9A7A2E; }
+  .sev-l { color: var(--ink-mute); }
+  .gov { display: flex; flex-direction: column; gap: 5px; padding: 16px 0; border-bottom: 1px solid var(--hair); }
+  .gov-h { font-size: 26px; font-weight: 600; color: var(--ink); }
+  .gov-b { font-size: 20px; font-weight: 300; color: var(--ink-mute); }
+
+  /* ---------- 90-day steps ---------- */
+  .step { padding: 0 26px; border-left: 1px solid var(--hair-strong); display: flex; flex-direction: column; }
+  .step:first-child { padding-left: 0; border-left: none; }
+  .step:last-child { padding-right: 0; }
+  .step-n { font-size: 44px; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; }
+  .step-h { font-size: 26px; font-weight: 700; color: var(--ink); margin: 14px 0 12px; line-height: 1.05; }
+  .step-b { font-size: 20px; font-weight: 300; line-height: 1.38; color: var(--ink-soft); }
+  .step-w { font-size: 18px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mute); margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--hair); }
+
+  /* ---------- region cost ---------- */
+  .rcost { font-size: 64px; font-weight: 700; letter-spacing: -0.03em; color: var(--accent); line-height: 0.9; }
+  /* ---------- process flow ---------- */
+  .flow { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
+  .flow-step { padding: 0 26px; border-left: 1px solid var(--hair-strong); position: relative; display:flex; flex-direction:column; }
+  .flow-step:first-child { padding-left: 0; border-left: none; }
+  .flow-step:last-child { padding-right: 0; }
+  .flow-n { display:inline-flex; align-items:center; justify-content:center; width: 46px; height: 46px; border-radius: 50%; background: var(--accent); color: var(--paper); font-size: 22px; font-weight: 700; }
+  .flow-h { font-size: 25px; font-weight: 700; color: var(--ink); margin: 16px 0 8px; line-height: 1.05; }
+  .flow-b { font-size: 19px; font-weight: 300; line-height: 1.34; color: var(--ink-soft); }
+  .flow-tag { font-size: 17px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--hair); }
+  .change-chip { border: 1px solid var(--hair-strong); padding: 18px 22px; }
+  .change-chip .ch-h { font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .change-chip .ch-b { font-size: 18px; font-weight: 300; color: var(--ink-soft); line-height: 1.3; }
+
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+  .col-h { font-size: var(--type-small); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--accent); margin: 0 0 16px; padding-bottom: 14px; border-bottom: 1px solid var(--hair-strong); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    [data-deck-active] .anim { animation: rise .6s cubic-bezier(.2,.7,.2,1) both; }
+    [data-deck-active] .anim-2 { animation: rise .6s .08s cubic-bezier(.2,.7,.2,1) both; }
+    [data-deck-active] .anim-3 { animation: rise .6s .16s cubic-bezier(.2,.7,.2,1) both; }
+    @keyframes rise { from { transform: translateY(18px); } to { transform: none; } }
+  }
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 01 COVER -->
+  <section class="dark" data-label="Cover">
+    <div class="topbar">
+      <span class="eyebrow">Confidential — Strategic Advisory</span>
+      <span class="brand">Chubb COG <span class="pg">Consumer Lines</span></span>
+    </div>
+    <div class="content" style="justify-content: center; padding-top: 0;">
+      <p class="kicker anim" style="margin: 0 0 28px;">Consumer Lines Transformation</p>
+      <h1 class="anim-2" style="font-size: var(--type-display); font-weight: 700; line-height: 0.92; letter-spacing: -0.03em; margin: 0; max-width: 18ch;">Contact Center<br>of the Future</h1>
+      <p class="standfirst anim-3" style="margin-top: 40px; max-width: 52ch;">A phased, 18-month programme to move Chubb COG from a reactive cost center to a proactive, AI-augmented engagement hub across A&amp;H, IPL and SPL.</p>
+    </div>
+    <div class="footer" style="border-color: rgba(244,241,234,0.16);">
+      <span>Client&nbsp;&nbsp;Chubb COG — Consumer</span>
+      <span>Horizon&nbsp;&nbsp;18–24 Months</span>
+      <span>Volume&nbsp;&nbsp;2M–5M Contacts / Year</span>
+    </div>
+  </section>
+
+  <!-- 02 CONTENTS -->
+  <section data-label="Contents">
+    <div class="topbar">
+      <span class="eyebrow">The Engagement</span>
+      <span class="brand">Chubb COG <span class="pg">02</span></span>
+    </div>
+    <div class="content">
+      <p class="kicker" style="margin: 0 0 20px;">Contents</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; column-gap: 100px; row-gap: 0; flex: 1 1 auto; align-content: center;">
+        <div class="toc-item"><span class="toc-n">01</span><span class="toc-t">Diagnostic &amp; As-Is Assessment</span></div>
+        <div class="toc-item"><span class="toc-n">05</span><span class="toc-t">Business Case &amp; KPIs</span></div>
+        <div class="toc-item"><span class="toc-n">02</span><span class="toc-t">Vision &amp; Strategic Pillars</span></div>
+        <div class="toc-item"><span class="toc-n">06</span><span class="toc-t">Target Operating Model</span></div>
+        <div class="toc-item"><span class="toc-n">03</span><span class="toc-t">Transformation Roadmap</span></div>
+        <div class="toc-item"><span class="toc-n">07</span><span class="toc-t">Risk &amp; Mitigation</span></div>
+        <div class="toc-item"><span class="toc-n">04</span><span class="toc-t">High-Impact Use Cases</span></div>
+        <div class="toc-item"><span class="toc-n">08</span><span class="toc-t">Governance &amp; Next Steps</span></div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+  <!-- 03 BURNING PLATFORM -->
+  <section data-label="Burning Platform">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">01</span> &nbsp;As-Is Assessment</span>
+      <span class="brand">Chubb COG <span class="pg">03</span></span>
+    </div>
+    <div class="content" style="padding-top: 36px;">
+      <p class="kicker" style="margin: 0 0 14px;">Burning Platform — Why Act Now</p>
+      <h2 class="headline" style="font-size: 56px; max-width: 30ch; margin-bottom: 10px;">Efficiency, handle time and CSAT are under simultaneous pressure</h2>
+      <p class="body" style="max-width: 78ch; margin: 0 0 26px;">A 2–5M contact/year hybrid center across A&amp;H, IPL and SPL — the status quo is not a viable strategy.</p>
+      <table class="d tight">
+        <thead>
+          <tr><th style="width: 22%;">Finding</th><th style="width: 22%;">Metric</th><th>Detail</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="lead">Average Handle Time</td><td class="metric">+35% vs. top quartile</td><td>Policy inquiry and claims FNOL calls above benchmark — fragmented systems and agent lookup overhead.</td></tr>
+          <tr><td class="lead">CSAT / NPS Gap</td><td class="metric">−18pt vs. P&amp;C leaders</td><td>Billing, policy changes and FNOL drive repeat contacts, long queues and channel friction.</td></tr>
+          <tr><td class="lead">Cost Per Contact</td><td class="metric">~$12 vs. $5 digital</td><td>Hybrid BPO model with undifferentiated routing and low self-serve deflection.</td></tr>
+          <tr><td class="lead">Repeat Contact Rate</td><td class="metric">~28% within 7 days</td><td>High first-contact failure across billing and policy inquiries; customers return at elevated rates.</td></tr>
+          <tr><td class="lead">Automation Coverage</td><td class="metric">&lt;15% of contacts</td><td>Chatbots and RPA deployed, but containment is low. No conversational AI for voice; digital not integrated.</td></tr>
+          <tr><td class="lead">Channel Integration</td><td class="metric">2 / 5 maturity</td><td>Voice and digital operate in silos. No unified customer view across interactions or policy systems.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+
+  <!-- 04 ROOT CAUSE & COMPETITIVE CONTEXT -->
+  <section data-label="Root Cause & Context">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">01</span> &nbsp;As-Is Assessment</span>
+      <span class="brand">Chubb COG <span class="pg">04</span></span>
+    </div>
+    <div class="content" style="padding-top: 28px;">
+      <p class="kicker" style="margin: 0 0 14px;">The Demand Is Structurally Inflated</p>
+      <h2 class="headline" style="font-size: 48px; max-width: 32ch; margin-bottom: 34px;">Much of today's volume never needed to reach an agent</h2>
+      <div class="twocol" style="align-content: start;">
+        <div>
+          <h3 class="col-h">Root Cause Analysis</h3>
+          <p class="body" style="font-size: 27px; margin: 0 0 22px;">Contact demand is inflated by <strong style="font-weight:600;color:var(--ink);">avoidable contacts</strong> — customers calling because self-service is inadequate, documentation is unclear, and proactive communication is absent.</p>
+          <p class="body" style="font-size: 27px; margin: 0;">Fixing the front door reduces volume <em style="font-style:normal;color:var(--accent);font-weight:600;">before</em> it ever enters the center — the single largest structural lever.</p>
+        </div>
+        <div>
+          <h3 class="col-h">Competitive Context</h3>
+          <p class="body" style="font-size: 27px; margin: 0 0 22px;">Leading insurers — Aflac, MetLife, Progressive — are deploying AI-augmented agents, conversational IVR and intelligent routing at scale.</p>
+          <p class="body" style="font-size: 27px; margin: 0;">Chubb's hybrid BPO model must evolve or risk customer attrition, particularly in A&amp;H where digital-native competitors are accelerating.</p>
+        </div>
+      </div>
+      <div style="margin-top:auto; border-top:2px solid var(--ink); padding-top:28px; display:grid; grid-template-columns: repeat(3,1fr); gap:0;">
+        <div style="padding-right:44px; border-right:1px solid var(--hair-strong);">
+          <div class="rcost">30–40%</div>
+          <div class="fig-l" style="font-size:22px; margin-top:12px;">of contacts are avoidable</div>
+        </div>
+        <div style="padding:0 44px; border-right:1px solid var(--hair-strong);">
+          <div class="rcost">~28%</div>
+          <div class="fig-l" style="font-size:22px; margin-top:12px;">return within 7 days</div>
+        </div>
+        <div style="padding-left:44px;">
+          <div class="rcost">&lt;15%</div>
+          <div class="fig-l" style="font-size:22px; margin-top:12px;">contained by automation today</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+  <!-- 4B REGIONAL COST & HEADCOUNT -->
+  <section data-label="Cost by Region">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">01</span> &nbsp;As-Is Assessment</span>
+      <span class="brand">Chubb COG <span class="pg">05</span></span>
+    </div>
+    <div class="content" style="padding-top: 30px;">
+      <p class="kicker" style="margin: 0 0 14px;">Today's Cost &amp; Headcount by Region</p>
+      <h2 class="headline" style="font-size: 50px; max-width: 32ch; margin-bottom: 18px;">A ~$30M annual run cost across three regional operations</h2>
+      <p class="body" style="max-width: 86ch; margin: 0 0 30px;">680+ in-house FTEs in LATAM and APAC, plus a fully-outsourced EMEA operation — three distinct delivery models, no shared automation layer.</p>
+      <table class="d">
+        <thead>
+          <tr><th style="width: 20%;">Region</th><th style="width: 16%;">Headcount</th><th style="width: 18%;">Annual Cost</th><th style="width: 18%;">Cost / FTE</th><th>Delivery Model</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="lead">LATAM</td><td>360 FTEs</td><td class="metric">$6.2M</td><td>~$17.2K</td><td>In-house, regional centers</td></tr>
+          <tr><td class="lead">APAC</td><td>320 FTEs</td><td class="metric">$5.8M</td><td>~$18.1K</td><td>In-house, regional centers</td></tr>
+          <tr><td class="lead">EMEA</td><td>BPO-staffed</td><td class="metric">$18.0M</td><td>—</td><td>Fully outsourced (BPO)</td></tr>
+          <tr style="border-bottom:none;"><td class="lead" style="font-weight:700;color:var(--ink);">Total</td><td style="font-weight:600;color:var(--ink);">680+ FTEs<span style="font-weight:300;color:var(--ink-mute);"> + BPO</span></td><td class="metric" style="color:var(--accent-bright);">$30.0M</td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+
+  <!-- 4C REGIONAL STRATEGY -->
+  <section data-label="Regional Strategy">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">01</span> &nbsp;As-Is Assessment</span>
+      <span class="brand">Chubb COG <span class="pg">06</span></span>
+    </div>
+    <div class="content" style="padding-top: 30px;">
+      <p class="kicker" style="margin: 0 0 14px;">A Distinct Lever in Each Region</p>
+      <h2 class="headline" style="font-size: 48px; max-width: 38ch; margin-bottom: 14px;">Three targeted moves take ~$8M out of the ~$30M base</h2>
+      <p class="body" style="max-width: 90ch; margin: 0 0 30px; font-size: 24px;">EMEA renegotiation, APAC nearshoring and LATAM automation — sequenced to the cost structure of each operation.</p>
+      <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:48px; flex:1 1 auto;">
+        <div style="display:flex; flex-direction:column;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:2px solid var(--ink); padding-bottom:14px;">
+            <span style="font-size:30px; font-weight:700;">EMEA</span>
+            <span style="font-size:22px; font-weight:600; color:var(--ink-mute);">$18.0M · BPO</span>
+          </div>
+          <div style="font-size:26px; font-weight:600; color:var(--ink); margin:22px 0 10px;">Renegotiate &amp; automate the BPO contract</div>
+          <p class="body" style="font-size:22px; margin:0 0 26px;">Move to outcome-based commercials and shift volume to AI containment across the fully-outsourced estate.</p>
+          <div style="margin-top:auto;">
+            <div class="rcost">−20%</div>
+            <div class="fig-l" style="font-size:23px; margin-top:14px;">BPO cost reduction</div>
+            <div class="fig-s" style="margin-top:6px;">≈ $3.6M annual saving</div>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:2px solid var(--ink); padding-bottom:14px;">
+            <span style="font-size:30px; font-weight:700;">APAC</span>
+            <span style="font-size:22px; font-weight:600; color:var(--ink-mute);">$5.8M · 320 FTE</span>
+          </div>
+          <div style="font-size:26px; font-weight:600; color:var(--ink); margin:22px 0 10px;">Enter Thailand as a nearshore hub</div>
+          <p class="body" style="font-size:22px; margin:0 0 26px;">Consolidate regional delivery into a lower-cost Thailand center, paired with automation of routine contacts.</p>
+          <div style="margin-top:auto;">
+            <div class="rcost">−35%</div>
+            <div class="fig-l" style="font-size:23px; margin-top:14px;">Total cost reduction</div>
+            <div class="fig-s" style="margin-top:6px;">≈ $2.0M annual saving</div>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:2px solid var(--ink); padding-bottom:14px;">
+            <span style="font-size:30px; font-weight:700;">LATAM</span>
+            <span style="font-size:22px; font-weight:600; color:var(--ink-mute);">$6.2M · 360 FTE</span>
+          </div>
+          <div style="font-size:26px; font-weight:600; color:var(--ink); margin:22px 0 10px;">Automated contact center</div>
+          <p class="body" style="font-size:22px; margin:0 0 26px;">Deploy AI self-service and agent assist at scale to compress both headcount and cost across the in-house base.</p>
+          <div style="margin-top:auto;">
+            <div class="rcost">−40%</div>
+            <div class="fig-l" style="font-size:23px; margin-top:14px;">FTE &amp; cost reduction</div>
+            <div class="fig-s" style="margin-top:6px;">≈ $2.5M annual saving</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+
+  <!-- 05 VISION — FUTURE STATE -->
+  <section class="dark" data-label="Future-State">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">02</span> &nbsp;Strategic Vision</span>
+      <span class="brand">Chubb COG <span class="pg">07</span></span>
+    </div>
+    <div class="content" style="padding-top: 28px;">
+      <p class="kicker" style="margin: 0 0 14px;">The Future-State Contact Center</p>
+      <h2 class="headline" style="font-size: 52px; max-width: 40ch; margin-bottom: 16px;">By 2027, a value-generating, AI-augmented engagement hub</h2>
+      <p class="standfirst" style="font-size: 28px; max-width: 88ch; margin-bottom: 40px;">Resolving most contacts digitally, empowering agents with intelligence, and delivering proactive service before customers need to call.</p>
+      <div class="grid-4" style="flex: 1 1 auto; align-content: stretch;">
+        <div style="display:flex; flex-direction:column;">
+          <div class="pillar-no">01</div>
+          <div class="pillar-h">Intelligent Automation</div>
+          <div class="pillar-b">AI-powered self-service resolves contacts without an agent, across voice and digital channels.</div>
+          <div style="margin-top:auto; padding-top:24px;"><div class="rcost" style="font-size:48px;">45%</div><div class="fig-s" style="margin-top:8px;">contained by AI</div></div>
+        </div>
+        <div style="display:flex; flex-direction:column;">
+          <div class="pillar-no">02</div>
+          <div class="pillar-h">Augmented Agents</div>
+          <div class="pillar-b">Every agent equipped with real-time guidance, next-best-action, policy summaries and sentiment detection.</div>
+          <div style="margin-top:auto; padding-top:24px;"><div class="rcost" style="font-size:48px;">−25%</div><div class="fig-s" style="margin-top:8px;">handle time</div></div>
+        </div>
+        <div style="display:flex; flex-direction:column;">
+          <div class="pillar-no">03</div>
+          <div class="pillar-h">Unified Omnichannel</div>
+          <div class="pillar-b">Seamless journeys across voice, chat, email and app — full context preserved at every handoff.</div>
+          <div style="margin-top:auto; padding-top:24px;"><div class="rcost" style="font-size:48px;">85%+</div><div class="fig-s" style="margin-top:8px;">first-contact resolution</div></div>
+        </div>
+        <div style="display:flex; flex-direction:column;">
+          <div class="pillar-no">04</div>
+          <div class="pillar-h">Proactive Engagement</div>
+          <div class="pillar-b">Outbound AI notifications deflect inbound demand: renewal reminders, claim updates, payment alerts.</div>
+          <div style="margin-top:auto; padding-top:24px;"><div class="rcost" style="font-size:48px;">+20pt</div><div class="fig-s" style="margin-top:8px;">NPS uplift</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+
+  <!-- 06 DIFFERENTIATED BY LOB -->
+  <section data-label="Differentiated by LOB">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">02</span> &nbsp;Strategic Vision</span>
+      <span class="brand">Chubb COG <span class="pg">08</span></span>
+    </div>
+    <div class="content" style="padding-top: 24px;">
+      <p class="kicker" style="margin: 0 0 14px;">Differentiated by Line of Business</p>
+      <h2 class="headline" style="font-size: 48px; max-width: 34ch; margin-bottom: 30px;">Not a technology upgrade — a redesign of how Chubb engages policyholders</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; flex:1 1 auto;">
+        <div style="padding-right: 44px; border-right: 1px solid var(--hair-strong); display:flex; flex-direction:column;">
+          <div class="pillar-no" style="font-size: 28px;">A&amp;H</div>
+          <div style="font-size:22px; font-weight:600; color:var(--ink); margin:16px 0 12px;">Claims &amp; benefit navigation</div>
+          <p class="body" style="font-size: 23px; margin: 0 0 20px;">Highest impact from <strong style="font-weight:600;color:var(--ink);">AI-guided self-service and proactive claim status</strong> that resolve before a call is placed.</p>
+          <div style="margin-top:auto; border-top:1px solid var(--hair); padding-top:18px;"><div class="rcost" style="font-size:44px;">40%</div><div class="fig-s" style="margin-top:6px;">FNOL handled contactless</div></div>
+        </div>
+        <div style="padding: 0 44px; border-right: 1px solid var(--hair-strong); display:flex; flex-direction:column;">
+          <div class="pillar-no" style="font-size: 28px;">IPL</div>
+          <div style="font-size:22px; font-weight:600; color:var(--ink); margin:16px 0 12px;">Policy changes &amp; billing</div>
+          <p class="body" style="font-size: 23px; margin: 0 0 20px;">Highest impact from <strong style="font-weight:600;color:var(--ink);">intelligent IVR deflection and real-time agent assist</strong> on complex servicing.</p>
+          <div style="margin-top:auto; border-top:1px solid var(--hair); padding-top:18px;"><div class="rcost" style="font-size:44px;">−35%</div><div class="fig-s" style="margin-top:6px;">handle time on changes</div></div>
+        </div>
+        <div style="padding-left: 44px; display:flex; flex-direction:column;">
+          <div class="pillar-no" style="font-size: 28px;">SPL</div>
+          <div style="font-size:22px; font-weight:600; color:var(--ink); margin:16px 0 12px;">Billing &amp; payments</div>
+          <p class="body" style="font-size: 23px; margin: 0 0 20px;">Highest impact from <strong style="font-weight:600;color:var(--ink);">AI self-serve containment across chat and IVR</strong>, available 24/7.</p>
+          <div style="margin-top:auto; border-top:1px solid var(--hair); padding-top:18px;"><div class="rcost" style="font-size:44px;">70%</div><div class="fig-s" style="margin-top:6px;">billing contained</div></div>
+        </div>
+      </div>
+      <div style="border-top: 2px solid var(--ink); padding-top: 26px; margin-top: 34px;">
+        <p class="body" style="font-size: 28px; max-width: 96ch; margin: 0;">The center shifts from a reactive cost center to a proactive CX asset. Agents evolve from transaction processors to <span style="color:var(--accent);font-weight:600;">relationship advisors</span>. Digital becomes the primary resolution path — human support reserved for complexity and empathy.</p>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+  <!-- 06B PROCESS & AREAS OF CHANGE -->
+  <section data-label="Process & Change">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">02</span> &nbsp;Strategic Vision</span>
+      <span class="brand">Chubb COG <span class="pg">09</span></span>
+    </div>
+    <div class="content" style="padding-top: 26px;">
+      <p class="kicker" style="margin: 0 0 12px;">The Target Process &amp; Main Areas of Change</p>
+      <h2 class="headline" style="font-size: 44px; max-width: 42ch; margin-bottom: 0;">A redesigned end-to-end journey, with intervention at every stage</h2>
+      <div style="flex:1 1 auto; display:flex; flex-direction:column; justify-content:space-evenly; padding: 24px 0;">
+      <div class="flow">
+        <div class="flow-step">
+          <span class="flow-n">1</span>
+          <div class="flow-h">Anticipate</div>
+          <div class="flow-b">Proactive outbound on renewals, claims and payments removes the reason to call.</div>
+          <div class="flow-tag">New layer</div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-n">2</span>
+          <div class="flow-h">Engage</div>
+          <div class="flow-b">Customer enters via voice, chat, app or email into one orchestrated front door.</div>
+          <div class="flow-tag">Omnichannel</div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-n">3</span>
+          <div class="flow-h">Understand</div>
+          <div class="flow-b">Conversational AI captures intent, verifies identity and pulls full policy context.</div>
+          <div class="flow-tag">Conversational AI</div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-n">4</span>
+          <div class="flow-h">Resolve</div>
+          <div class="flow-b">AI self-service closes routine contacts; complex cases route to an augmented agent.</div>
+          <div class="flow-tag">Self-serve + assist</div>
+        </div>
+        <div class="flow-step">
+          <span class="flow-n">5</span>
+          <div class="flow-h">Learn</div>
+          <div class="flow-b">100% AI quality scoring feeds a continuous loop that retrains models and content.</div>
+          <div class="flow-tag">Closed loop</div>
+        </div>
+      </div>
+      <div style="margin-top:0;">
+        <h3 class="col-h" style="border-color: var(--ink); border-width:2px;">Five Main Areas of Change</h3>
+        <div style="display:grid; grid-template-columns: repeat(5,1fr); gap:20px;">
+          <div class="change-chip"><div class="ch-h">Proactive engagement</div><div class="ch-b">Outbound deflection before inbound demand forms.</div></div>
+          <div class="change-chip"><div class="ch-h">AI front door</div><div class="ch-b">Conversational voice &amp; chat containment.</div></div>
+          <div class="change-chip"><div class="ch-h">Unified context</div><div class="ch-b">Single customer view across policy &amp; history.</div></div>
+          <div class="change-chip"><div class="ch-h">Agent augmentation</div><div class="ch-b">Real-time assist, next-best-action, guardrails.</div></div>
+          <div class="change-chip"><div class="ch-h">Continuous learning</div><div class="ch-b">100% QA and model retraining loop.</div></div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+
+  <!-- 07 ROADMAP TIMELINE -->
+  <section data-label="Roadmap">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">03</span> &nbsp;Transformation Roadmap</span>
+      <span class="brand">Chubb COG <span class="pg">10</span></span>
+    </div>
+    <div class="content" style="padding-top: 34px;">
+      <p class="kicker" style="margin: 0 0 14px;">An 18-Month Phased Delivery Plan</p>
+      <h2 class="headline" style="font-size: 50px; max-width: 30ch; margin-bottom: 40px;">Foundations first, intelligence at scale, then value</h2>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; flex: 1 1 auto;">
+        <div style="display:flex; flex-direction:column;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom: 2px solid var(--ink); padding-bottom: 14px;">
+            <span style="font-size:28px; font-weight:700;">Phase 01</span>
+            <span style="font-size:20px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-mute);">M0 – M6</span>
+          </div>
+          <div style="font-size:30px; font-weight:700; color:var(--accent); margin:20px 0 6px;">Foundation</div>
+          <div style="font-size:23px; font-weight:600; color:var(--ink); margin-bottom:14px;">Stabilize, Unify &amp; Instrument</div>
+          <p class="body" style="font-size:22px; margin:0 0 24px;">Establish the data and technology foundations that enable intelligent operations; reduce immediate pain and build measurement rigour.</p>
+          <div style="margin-top:auto; border-top:1px solid var(--hair); padding-top:18px; display:flex; flex-direction:column; gap:10px;">
+            <span class="rmtarget">AHT −15% (quick wins)</span>
+            <span class="rmtarget">CSAT baseline +10pt</span>
+            <span class="rmtarget">IVR containment +20%</span>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom: 2px solid var(--ink); padding-bottom: 14px;">
+            <span style="font-size:28px; font-weight:700;">Phase 02</span>
+            <span style="font-size:20px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-mute);">M4 – M14</span>
+          </div>
+          <div style="font-size:30px; font-weight:700; color:var(--accent); margin:20px 0 6px;">Intelligence</div>
+          <div style="font-size:23px; font-weight:600; color:var(--ink); margin-bottom:14px;">Deploy AI &amp; Automate at Scale</div>
+          <p class="body" style="font-size:22px; margin:0 0 24px;">Conversational AI, agent augmentation and intelligent routing across all three LOBs. Automation scales from &lt;15% to 40%+ — the maximum-impact phase.</p>
+          <div style="margin-top:auto; border-top:1px solid var(--hair); padding-top:18px; display:flex; flex-direction:column; gap:10px;">
+            <span class="rmtarget">Cost / contact −30%</span>
+            <span class="rmtarget">Automation 40%+ · AHT −25%</span>
+            <span class="rmtarget">NPS +15–20pt</span>
+          </div>
+        </div>
+        <div style="display:flex; flex-direction:column;">
+          <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom: 2px solid var(--ink); padding-bottom: 14px;">
+            <span style="font-size:28px; font-weight:700;">Phase 03</span>
+            <span style="font-size:20px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-mute);">M13 – M18+</span>
+          </div>
+          <div style="font-size:30px; font-weight:700; color:var(--accent); margin:20px 0 6px;">Optimisation</div>
+          <div style="font-size:23px; font-weight:600; color:var(--ink); margin-bottom:14px;">Scale, Embed &amp; Generate Value</div>
+          <p class="body" style="font-size:22px; margin:0 0 24px;">Models retrained on Chubb data. The center becomes a revenue contributor through retention and cross-sell, and the operating model is right-sized.</p>
+          <div style="margin-top:auto; border-top:1px solid var(--hair); padding-top:18px; display:flex; flex-direction:column; gap:10px;">
+            <span class="rmtarget">Revenue uplift via retention</span>
+            <span class="rmtarget">BPO cost −20–25%</span>
+            <span class="rmtarget">Top-quartile NPS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+
+  <!-- 08 PHASE DELIVERABLES -->
+  <section data-label="Phase Deliverables">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">03</span> &nbsp;Transformation Roadmap</span>
+      <span class="brand">Chubb COG <span class="pg">11</span></span>
+    </div>
+    <div class="content" style="padding-top: 26px;">
+      <p class="kicker" style="margin: 0 0 12px;">Key Workstreams &amp; Deliverables by Phase</p>
+      <h2 class="headline" style="font-size: 44px; max-width: 40ch; margin-bottom: 30px;">Each phase ships concrete, measurable deliverables</h2>
+      <div style="display:grid; grid-template-columns: repeat(3,1fr); gap: 50px; flex:1 1 auto;">
+        <div>
+          <div class="ph-tag">01 — Foundation</div>
+          <p class="body" style="font-size:20px; margin:0 0 18px; color:var(--ink-mute);">Stabilise, unify and instrument the operation.</p>
+          <ul class="dlist" style="gap:18px;">
+            <li>Contact-driver taxonomy across A&amp;H, IPL, SPL with avoidable-contact % identified</li>
+            <li>Integrated agent desktop — single customer view (policy + interaction history)</li>
+            <li>Redesigned IVR targeting +20% containment in billing &amp; policy inquiry</li>
+            <li>Real-time KPI dashboard: AHT, FCR, CSAT, containment</li>
+            <li>BPO scorecard and governance cadence aligned to objectives</li>
+            <li>Data foundation: unified customer ID, consent, interaction data lake</li>
+          </ul>
+        </div>
+        <div>
+          <div class="ph-tag">02 — Intelligence</div>
+          <p class="body" style="font-size:20px; margin:0 0 18px; color:var(--ink-mute);">Deploy AI and automate at scale across LOBs.</p>
+          <ul class="dlist" style="gap:18px;">
+            <li>Conversational IVR (NLU) for top-5 A&amp;H intents — FNOL, benefits, claims, payments, lookup</li>
+            <li>AI chat assistant, 60%+ containment for billing &amp; policy inquiry (IPL/SPL)</li>
+            <li>Real-time Agent Assist: live transcription, knowledge retrieval, next-best-action, guardrails</li>
+            <li>Intelligent routing: skills-, intent- and propensity-based</li>
+            <li>Outbound proactive notifications — deflect 8–12% inbound</li>
+            <li>AI quality assurance: 100% call scoring replaces manual sampling</li>
+          </ul>
+        </div>
+        <div>
+          <div class="ph-tag">03 — Optimisation</div>
+          <p class="body" style="font-size:20px; margin:0 0 18px; color:var(--ink-mute);">Scale, embed and generate sustained value.</p>
+          <ul class="dlist" style="gap:18px;">
+            <li>Predictive WFM model reducing overstaffing 12–18%</li>
+            <li>Churn-propensity model triggering retention offers at renewal</li>
+            <li>Cross-LOB opportunity ID: A&amp;H customers surfaced for IPL/SPL</li>
+            <li>BPO contract renegotiated and right-sized to automation achieved</li>
+            <li>LLM fine-tuned on Chubb policy, claims and regulatory content</li>
+            <li>Mobile self-serve portal — policy changes, FNOL, billing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+  <!-- 09 USE CASES -->
+  <section data-label="Use Cases">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">04</span> &nbsp;High-Impact Use Cases</span>
+      <span class="brand">Chubb COG <span class="pg">12</span></span>
+    </div>
+    <div class="content" style="padding-top: 28px;">
+      <p class="kicker" style="margin: 0 0 16px;">Priority AI &amp; Automation Plays</p>
+      <table class="d uc">
+        <thead>
+          <tr><th style="width: 7%;">LOB</th><th style="width: 27%;">Use Case</th><th>Description</th><th style="width: 22%;">Impact</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="lob">A&amp;H</td><td class="lead">Conversational FNOL — Claims</td><td>AI voice agent collects FNOL data, validates coverage, triggers claim creation and confirms status — no agent for standard cases.</td><td class="metric">40% FNOL contactless · AHT −8 min</td></tr>
+          <tr><td class="lob">A&amp;H</td><td class="lead">Benefit Inquiry Self-Service</td><td>NLU IVR resolves coverage queries by parsing policy data in real time — the top driver of A&amp;H volume.</td><td class="metric">25% deflection · CSAT +12pt</td></tr>
+          <tr><td class="lob">IPL</td><td class="lead">AI Agent Assist — Policy Changes</td><td>Live transcription surfaces the record, pre-populates the change form and guides compliance steps.</td><td class="metric">AHT −35% · Errors −60%</td></tr>
+          <tr><td class="lob">SPL</td><td class="lead">Billing AI Self-Serve (Chat + IVR)</td><td>Automated payments, balance and payment-plan setup — handles 70% of billing contacts without a live agent.</td><td class="metric">70% containment · 24/7</td></tr>
+          <tr><td class="lob">IPL</td><td class="lead">Proactive Renewal Outreach</td><td>AI outbound SMS/email/voice with personalised retention offers from a propensity model.</td><td class="metric">Cancels −10% · Retention +3%</td></tr>
+          <tr><td class="lob">A&amp;H</td><td class="lead">Intelligent Escalation &amp; Sentiment</td><td>Sentiment model flags distressed customers and routes to empathy-trained specialists with full context.</td><td class="metric">NPS +20pt · Escalation −60%</td></tr>
+          <tr><td class="lob">SPL</td><td class="lead">100% AI Quality Assurance</td><td>Every interaction scored for compliance, empathy, FCR and adherence — replacing manual sampling.</td><td class="metric">100% coverage</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+  <!-- 10 FINANCIAL IMPACT -->
+  <section class="dark" data-label="Value at Stake">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">05</span> &nbsp;Business Case</span>
+      <span class="brand">Chubb COG <span class="pg">13</span></span>
+    </div>
+    <div class="content" style="padding-top: 30px;">
+      <p class="kicker" style="margin: 0 0 14px;">Financial Impact — Value at Stake</p>
+      <h2 class="headline" style="font-size: 50px; max-width: 30ch; margin-bottom: 50px;">A compelling return within the 18-month horizon</h2>
+      <div class="figrow" style="margin-bottom: 46px;">
+        <div>
+          <div class="fig">$18–24M</div>
+          <div class="fig-l">Annual run-rate benefit</div>
+          <div class="fig-s">Cost savings plus revenue uplift at steady state.</div>
+        </div>
+        <div>
+          <div class="fig">30–35%</div>
+          <div class="fig-l">Cost-per-contact reduction</div>
+          <div class="fig-s">From ~$12 toward digital-led economics.</div>
+        </div>
+        <div>
+          <div class="fig">3–4×</div>
+          <div class="fig-l">Return on investment</div>
+          <div class="fig-s">Over the programme horizon.</div>
+        </div>
+        <div>
+          <div class="fig">&lt;14<span style="font-size:0.5em; letter-spacing:0;"> mo</span></div>
+          <div class="fig-l">Payback period</div>
+          <div class="fig-s">Break-even within Phase 02.</div>
+        </div>
+      </div>
+      <div style="border-top: 1px solid rgba(244,241,234,0.2); padding-top: 26px;">
+        <p class="standfirst" style="font-size: 27px; max-width: 96ch; margin: 0;">Value compounds beyond cost: higher retention, cross-sell capture and avoided attrition convert the center from a cost line into a measurable contributor to Consumer Lines growth.</p>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+
+  <!-- 11 INVESTMENT & BENEFIT -->
+  <section data-label="Investment & Benefit">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">05</span> &nbsp;Business Case</span>
+      <span class="brand">Chubb COG <span class="pg">14</span></span>
+    </div>
+    <div class="content" style="padding-top: 30px;">
+      <p class="kicker" style="margin: 0 0 16px;">Investment &amp; Annual Benefit Bridge</p>
+      <table class="d">
+        <thead>
+          <tr><th style="width: 40%;">Value &amp; Investment Driver</th><th style="width: 28%;">Basis</th><th>Annual Value</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="lead">Automation &amp; deflection savings</td><td>40%+ of contacts contained digitally</td><td class="metric">$9–11M</td></tr>
+          <tr><td class="lead">Agent productivity (AHT, Agent Assist)</td><td>−25% handle time, −60% errors</td><td class="metric">$4–5M</td></tr>
+          <tr><td class="lead">WFM optimisation &amp; BPO right-sizing</td><td>Predictive staffing, contract reset</td><td class="metric">$3–4M</td></tr>
+          <tr><td class="lead">Retention &amp; cross-sell uplift</td><td>Churn model + opportunity detection</td><td class="metric">$2–4M</td></tr>
+          <tr style="border-bottom:none;"><td class="lead" style="font-weight:700;color:var(--ink);">Total annual benefit (run-rate)</td><td></td><td class="metric" style="color:var(--accent-bright);">$18–24M</td></tr>
+        </tbody>
+      </table>
+      <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:0; margin-top:34px; border-top:2px solid var(--ink); padding-top:26px;">
+        <div style="padding-right:40px; border-right:1px solid var(--hair-strong);">
+          <div class="fig-l" style="margin-top:0; color:var(--ink-mute); font-size:21px; letter-spacing:0.1em; text-transform:uppercase;">Total Investment</div>
+          <div style="font-size:54px; font-weight:700; color:var(--accent); margin-top:8px;">$6–8M</div>
+          <p class="body" style="font-size:20px; margin:8px 0 0;">Technology, integration, change &amp; run, over 18 months.</p>
+        </div>
+        <div style="padding:0 40px; border-right:1px solid var(--hair-strong);">
+          <div class="fig-l" style="margin-top:0; color:var(--ink-mute); font-size:21px; letter-spacing:0.1em; text-transform:uppercase;">Net Year-1 Position</div>
+          <div style="font-size:54px; font-weight:700; color:var(--accent); margin-top:8px;">Break-even</div>
+          <p class="body" style="font-size:20px; margin:8px 0 0;">Cumulative benefit overtakes spend within Phase 02.</p>
+        </div>
+        <div style="padding-left:40px;">
+          <div class="fig-l" style="margin-top:0; color:var(--ink-mute); font-size:21px; letter-spacing:0.1em; text-transform:uppercase;">3-Year NPV</div>
+          <div style="font-size:54px; font-weight:700; color:var(--accent); margin-top:8px;">$40M+</div>
+          <p class="body" style="font-size:20px; margin:8px 0 0;">Risk-adjusted, run-rate benefit sustained.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+  <!-- 12 TARGET OPERATING MODEL -->
+  <section data-label="Operating Model">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">06</span> &nbsp;Target Operating Model</span>
+      <span class="brand">Chubb COG <span class="pg">15</span></span>
+    </div>
+    <div class="content">
+      <p class="kicker" style="margin: 0 0 14px;">The Target Operating Model</p>
+      <h2 class="headline" style="font-size: 48px; max-width: 36ch; margin-bottom: 30px;">Digital-first resolution, human effort reserved for what matters</h2>
+      <div class="twocol" style="flex:1 1 auto; align-content:start;">
+        <div>
+          <h3 class="col-h">Channel &amp; Resolution Mix — 2027 Target</h3>
+          <div style="display:flex; flex-direction:column; gap:0;">
+            <div class="bar-row"><span class="bar-l">AI self-service</span><div class="bar-track"><div class="bar-fill" style="width:45%;"></div></div><span class="bar-v">45%</span></div>
+            <div class="bar-row"><span class="bar-l">Agent + AI assist</span><div class="bar-track"><div class="bar-fill" style="width:35%;"></div></div><span class="bar-v">35%</span></div>
+            <div class="bar-row"><span class="bar-l">Specialist / complex</span><div class="bar-track"><div class="bar-fill" style="width:12%;"></div></div><span class="bar-v">12%</span></div>
+            <div class="bar-row"><span class="bar-l">Proactive outbound</span><div class="bar-track"><div class="bar-fill" style="width:8%;"></div></div><span class="bar-v">8%</span></div>
+          </div>
+          <p class="body" style="font-size:21px; margin:26px 0 0;">From &lt;15% automated today to 45% AI-contained — voice and digital under one orchestration layer.</p>
+        </div>
+        <div>
+          <h3 class="col-h">Workforce Evolution</h3>
+          <ul class="dlist" style="gap:18px;">
+            <li><strong style="font-weight:600;color:var(--ink);">From processors to advisors.</strong> Agents handle complex, empathetic and high-value interactions; routine work is automated.</li>
+            <li><strong style="font-weight:600;color:var(--ink);">Re-skilling pathway.</strong> Structured training into AI-supervision, exception-handling and relationship roles.</li>
+            <li><strong style="font-weight:600;color:var(--ink);">BPO partnership reset.</strong> Outcome-based commercials aligned to containment, CSAT and FCR — not headcount.</li>
+            <li><strong style="font-weight:600;color:var(--ink);">Right-sized footprint.</strong> 20–25% effective capacity reduction absorbed largely through attrition.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+
+  <!-- 13 TECH STACK & KPIs -->
+  <section data-label="Tech & KPIs">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">06</span> &nbsp;Target Operating Model</span>
+      <span class="brand">Chubb COG <span class="pg">16</span></span>
+    </div>
+    <div class="content">
+      <p class="kicker" style="margin: 0 0 14px;">Technology Stack &amp; North-Star KPIs</p>
+      <div class="twocol" style="flex:1 1 auto; align-content:start;">
+        <div>
+          <h3 class="col-h">Capability Architecture</h3>
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <div class="layer"><span class="layer-n">01</span><div><div class="layer-h">Conversational AI &amp; NLU</div><div class="layer-b">Voice + chat virtual agents across all LOBs</div></div></div>
+            <div class="layer"><span class="layer-n">02</span><div><div class="layer-h">Agent Assist &amp; Knowledge</div><div class="layer-b">Real-time transcription, retrieval, next-best-action</div></div></div>
+            <div class="layer"><span class="layer-n">03</span><div><div class="layer-h">Orchestration &amp; Routing</div><div class="layer-b">Intent-, skills- and propensity-based across channels</div></div></div>
+            <div class="layer"><span class="layer-n">04</span><div><div class="layer-h">Unified Data &amp; CDP</div><div class="layer-b">Single customer view; policy, claims &amp; interaction data</div></div></div>
+            <div class="layer"><span class="layer-n">05</span><div><div class="layer-h">Analytics &amp; AI QA</div><div class="layer-b">100% scoring, real-time KPIs, model governance</div></div></div>
+          </div>
+        </div>
+        <div>
+          <h3 class="col-h">North-Star KPIs — Baseline → Target</h3>
+          <table class="d tight" style="margin-top:-4px;">
+            <thead><tr><th>Metric</th><th>Now</th><th>2027</th></tr></thead>
+            <tbody>
+              <tr><td class="lead">Automation / containment</td><td>&lt;15%</td><td class="metric">45%</td></tr>
+              <tr><td class="lead">Cost per contact</td><td>~$12</td><td class="metric">~$8</td></tr>
+              <tr><td class="lead">Average handle time</td><td>Base</td><td class="metric">−25%</td></tr>
+              <tr><td class="lead">First-contact resolution</td><td>~68%</td><td class="metric">85%+</td></tr>
+              <tr><td class="lead">Repeat contact (7-day)</td><td>~28%</td><td class="metric">&lt;12%</td></tr>
+              <tr><td class="lead">NPS</td><td>Base</td><td class="metric">+20pt</td></tr>
+              <tr style="border-bottom:none;"><td class="lead">Proactive contact share</td><td>~0%</td><td class="metric">8–10%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+  <!-- 14 RISK & MITIGATION -->
+  <section data-label="Risk & Mitigation">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">07</span> &nbsp;Risk &amp; Mitigation</span>
+      <span class="brand">Chubb COG <span class="pg">17</span></span>
+    </div>
+    <div class="content" style="padding-top: 28px;">
+      <p class="kicker" style="margin: 0 0 16px;">Key Risks &amp; Mitigation</p>
+      <table class="d tight">
+        <thead>
+          <tr><th style="width: 26%;">Risk</th><th style="width: 10%;">Severity</th><th>Mitigation</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="lead">Customer experience degradation from over-automation</td><td class="sev sev-h">High</td><td>Human-in-the-loop design; sentiment-based escalation; phased rollout with CSAT gates before scaling each use case.</td></tr>
+          <tr><td class="lead">Regulatory &amp; compliance exposure (AI decisions, data)</td><td class="sev sev-h">High</td><td>Compliance-by-design; explainable models; legal sign-off per use case; full audit trail and 100% AI QA.</td></tr>
+          <tr><td class="lead">Data quality &amp; integration complexity</td><td class="sev sev-m">Med</td><td>Phase-01 data foundation first; unified customer ID; staged integration with legacy policy systems.</td></tr>
+          <tr><td class="lead">Workforce disruption &amp; change resistance</td><td class="sev sev-m">Med</td><td>Re-skilling pathways; attrition-led right-sizing; transparent comms; agents positioned as advisors, not displaced.</td></tr>
+          <tr><td class="lead">BPO partner misalignment</td><td class="sev sev-m">Med</td><td>Renegotiate to outcome-based commercials; joint governance; shared containment and CSAT targets.</td></tr>
+          <tr><td class="lead">Technology vendor lock-in &amp; model drift</td><td class="sev sev-l">Low</td><td>Modular, API-first architecture; portable data layer; continuous monitoring and scheduled retraining on Chubb data.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+
+  <!-- 15 GOVERNANCE -->
+  <section data-label="Governance">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">08</span> &nbsp;Governance &amp; Next Steps</span>
+      <span class="brand">Chubb COG <span class="pg">18</span></span>
+    </div>
+    <div class="content">
+      <p class="kicker" style="margin: 0 0 14px;">Governance &amp; Programme Team</p>
+      <h2 class="headline" style="font-size: 46px; max-width: 38ch; margin-bottom: 30px;">A single accountable structure, clear gates, executive sponsorship</h2>
+      <div class="twocol" style="flex:1 1 auto; align-content:start;">
+        <div>
+          <h3 class="col-h">Operating Structure</h3>
+          <div style="display:flex; flex-direction:column; gap:0;">
+            <div class="gov"><span class="gov-h">Executive Steering Committee</span><span class="gov-b">COG &amp; Consumer Lines sponsors · monthly · investment &amp; gate decisions</span></div>
+            <div class="gov"><span class="gov-h">Programme Director &amp; PMO</span><span class="gov-b">End-to-end delivery, value tracking, cross-LOB coordination</span></div>
+            <div class="gov"><span class="gov-h">Workstream Leads</span><span class="gov-b">CX · AI &amp; Tech · Data · Operations · Change</span></div>
+            <div class="gov"><span class="gov-h">AI Governance &amp; Risk Board</span><span class="gov-b">Compliance, model risk, legal sign-off per use case</span></div>
+          </div>
+        </div>
+        <div>
+          <h3 class="col-h">Stage Gates &amp; Cadence</h3>
+          <ul class="dlist" style="gap:18px;">
+            <li><strong style="font-weight:600;color:var(--ink);">Gate 0 — Mobilise.</strong> Charter, funding, team and baseline agreed.</li>
+            <li><strong style="font-weight:600;color:var(--ink);">Gate 1 — Foundation proven.</strong> Data, desktop and KPI rigour live; quick wins banked.</li>
+            <li><strong style="font-weight:600;color:var(--ink);">Gate 2 — AI scaled.</strong> Containment &amp; CSAT targets met before full rollout.</li>
+            <li><strong style="font-weight:600;color:var(--ink);">Gate 3 — Value realised.</strong> Run-rate benefit validated; BPO reset executed.</li>
+            <li><strong style="font-weight:600;color:var(--ink);">Cadence.</strong> Weekly delivery · monthly steering · quarterly board review.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+  <!-- 16 FIRST 90 DAYS -->
+  <section data-label="First 90 Days">
+    <div class="topbar">
+      <span class="eyebrow"><span class="num">08</span> &nbsp;Governance &amp; Next Steps</span>
+      <span class="brand">Chubb COG <span class="pg">19</span></span>
+    </div>
+    <div class="content" style="padding-top: 30px;">
+      <p class="kicker" style="margin: 0 0 14px;">The First 90 Days</p>
+      <h2 class="headline" style="font-size: 48px; max-width: 32ch; margin-bottom: 44px;">Five moves to mobilise with momentum</h2>
+      <div style="display:grid; grid-template-columns: repeat(5,1fr); gap:0; flex:1 1 auto; align-content:start;">
+        <div class="step"><div class="step-n">01</div><div class="step-h">Mandate &amp; Fund</div><div class="step-b">Secure steering sponsorship, approve Phase-01 budget, appoint Programme Director.</div><div class="step-w">Weeks 1–3</div></div>
+        <div class="step"><div class="step-n">02</div><div class="step-h">Baseline the Truth</div><div class="step-b">Instrument AHT, FCR, CSAT, cost &amp; containment; build the contact-driver taxonomy.</div><div class="step-w">Weeks 2–6</div></div>
+        <div class="step"><div class="step-n">03</div><div class="step-h">Prove a Use Case</div><div class="step-b">Stand up one AI pilot — A&amp;H benefit inquiry or SPL billing self-serve.</div><div class="step-w">Weeks 4–10</div></div>
+        <div class="step"><div class="step-n">04</div><div class="step-h">Reset the BPO</div><div class="step-b">Open outcome-based renegotiation; align scorecard to containment &amp; CSAT.</div><div class="step-w">Weeks 6–12</div></div>
+        <div class="step"><div class="step-n">05</div><div class="step-h">Govern from Day One</div><div class="step-b">Establish the AI Governance Board and stage-gate cadence.</div><div class="step-w">Weeks 1–12</div></div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Contact Center of the Future</span>
+      <span>Confidential</span>
+    </div>
+  </section>
+
+  <!-- 17 CLOSING -->
+  <section class="dark" data-label="The Window to Act">
+    <div class="topbar">
+      <span class="eyebrow">Recommendation</span>
+      <span class="brand">Chubb COG <span class="pg">20</span></span>
+    </div>
+    <div class="content" style="justify-content:center; padding-top:0;">
+      <p class="kicker" style="margin: 0 0 26px;">The Window to Act</p>
+      <h2 style="font-size: 78px; font-weight: 700; line-height: 0.98; letter-spacing: -0.03em; margin: 0; max-width: 24ch;">Move now, or cede the customer relationship to digital-native insurers.</h2>
+      <p class="standfirst" style="font-size: 30px; max-width: 80ch; margin-top: 38px;">An 18-month programme — $6–8M invested for $18–24M annual run-rate benefit — that turns the contact center from a cost line into a proactive engagement engine across A&amp;H, IPL and SPL. The recommendation is to approve mobilisation and fund Phase 01.</p>
+    </div>
+    <div class="footer">
+      <span>Chubb COG — Consumer Lines Transformation</span>
+      <span>Confidential — Strategic Advisory</span>
+    </div>
+  </section>
+
+</deck-stage>
+<script src="deck-stage.js"></script>
+</body>
+</html>
