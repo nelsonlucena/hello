@@ -80,6 +80,47 @@ When producing a batch:
   allows — vary the hook mechanism: text-led, face-led, product-led, problem-led
 - Keep brand anchor consistent across all variants: same logo position, same brand color accent
 
+### SaudApp Brand Color Palette — Canonical Reference
+
+Use these exact hex values whenever generating for SaudApp. Never substitute with
+the old palette (#2D1B69, #00C9A7, #6B5CE7) — those were approximations.
+
+```
+BRAND CORE
+  Logo / primary accent:  #8c80f8  (lavender purple — the brand signature)
+  Darker purple:          #7265e3  (CTA hover, borders, emphasis)
+  Light lavender:         #af8eff  (highlights, soft overlays)
+
+DARK BACKGROUNDS (prefer for scroll-stopping ads)
+  Primary dark bg:        #2d3142  (deep navy — use as main background)
+  Secondary dark bg:      #4c5980  (slate blue — for split panels, secondary areas)
+
+ELECTRIC ACCENTS (use for CTAs, price callouts, checkmarks)
+  Electric blue:          #1f87fe  (primary CTA color — highest contrast on dark bg)
+  Sky blue:               #59b9fd  (secondary highlights)
+  Soft blue:              #8facff  (subtle highlights, badges)
+  Teal/cyan:              #7fe3f0  (check marks, success states, pricing)
+
+WARM ACCENT
+  Coral/salmon:           #ff9b90  (emotional warmth — testimonials, family ads, before/after)
+
+LIGHT BACKGROUNDS (feed ads, review cards, claim-led)
+  Near-white:             #f4f6fa  (preferred light bg — slightly cool, not stark white)
+  Pure white:             #ffffff  (card backgrounds, text)
+  Warm beige/nude:        #e1cbbc  (aspirational lifestyle contexts)
+
+NEUTRAL TONES
+  Gray-purple:            #9c9eb9  (supporting text, subheadlines on light bg)
+  Light gray:             #d6d9e0  (dividers, borders)
+```
+
+**Recommended combinations per ad type:**
+- Dark Authority / Bold Claim dark: bg `#2d3142` · accent `#1f87fe` · logo `#8c80f8`
+- Comparison / US vs Them: brand side `#2d3142` · adversary side `#4c5980` · checks `#7fe3f0` · X `#ff9b90`
+- Light Aspirational / Claim-led: bg `#f4f6fa` · headline `#2d3142` · CTA `#1f87fe` · accent `#8c80f8`
+- Review Card: card `#ffffff` · bg `#2d3142` · stars `#1f87fe` or amber · badge `#7fe3f0`
+- Testimonial warm: bg `#f4f6fa` or `#e1cbbc` · stars amber · accent `#ff9b90`
+
 ### People in Images — Permanent Rule
 
 **ALL faces, lifestyle photos, and people must match the target market.**
@@ -365,6 +406,16 @@ Counts must sum to [total_images].
 
 ## Step 4 — Fetch the product page and visually describe the product
 
+**SaudApp shortcut**: If the product is SaudApp (`saudapp.com.br` or similar), skip the web fetch
+and photo download — read the pre-built canonical brand file instead:
+```bash
+cat ~/.claude/skills/static-remix/saudapp_brand.txt
+```
+Copy it to `<RUN_DIR>/product_visual.txt` and skip to Step 5. The canonical file has verified
+hex values and ad rules already set.
+
+For all other products:
+
 1. If the user provided an HTML file path instead of a URL, read that file directly with the `Read` tool.
    Otherwise use `WebFetch` on the product URL.
 2. **For Shopify stores**: also fetch `<product_url>.json` to get `product.images` CDN URLs.
@@ -459,9 +510,16 @@ Save all briefs to `<RUN_DIR>/briefs.txt`.
 
 **BRAND_LOCK** — always inject:
 ```
-CRITICAL: Use ONLY the brand colors extracted from the product page. Reproduce the exact
-product logo from the reference image. No color substitutions. Logo must be prominent and
-legible. Prefer the dark end of the brand palette for the background.
+CRITICAL: Use ONLY the SaudApp brand colors. Exact hex values:
+  Dark backgrounds: #2d3142 (primary) or #4c5980 (secondary)
+  Logo / primary purple: #8c80f8 (lavender)
+  Electric blue CTA: #1f87fe
+  Teal accent: #7fe3f0
+  Coral warm accent: #ff9b90
+  Light bg: #f4f6fa or #ffffff
+Reproduce the exact SaudApp logo from the reference image (caduceus icon + wordmark
+in #8c80f8). No color substitutions. Logo must be prominent and legible.
+Prefer #2d3142 as background — it is the brand's primary dark bg.
 ```
 
 **AESTHETIC_LOCK** — always inject:

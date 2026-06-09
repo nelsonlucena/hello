@@ -1,0 +1,91 @@
+SAUDAPP — CANONICAL BRAND VISUAL DESCRIPTION
+=============================================
+Last updated: 2026-06-09 (from official Canva palette)
+
+PRODUCT TYPE: Digital health subscription app (Brazil)
+NOT a physical product — visual identity is the app UI + logo + brand palette.
+
+LOGO
+- Wordmark: "SaudApp" in a rounded, friendly sans-serif (Sora/similar)
+- Color: #8c80f8 (lavender purple — the brand signature)
+- Icon: Caduceus medical staff with wifi/signal arcs on top — merges health + digital
+- Feel: Approachable, modern, trustworthy digital health
+
+BRAND PALETTE — OFFICIAL (from Canva brand kit, verified 2026-06-09)
+---------------------------------------------------------------------
+BRAND CORE
+  Logo / primary accent:  #8c80f8  (lavender purple — brand signature)
+  Darker purple:          #7265e3  (CTA hover, borders, emphasis)
+  Light lavender:         #af8eff  (highlights, soft overlays)
+
+DARK BACKGROUNDS (prefer for scroll-stopping ads)
+  Primary dark bg:        #2d3142  (deep navy — main background)
+  Secondary dark bg:      #4c5980  (slate blue — split panels, secondary areas)
+
+ELECTRIC ACCENTS (CTAs, price callouts, checkmarks)
+  Electric blue:          #1f87fe  (primary CTA — highest contrast on dark bg)
+  Sky blue:               #59b9fd  (secondary highlights)
+  Soft blue:              #8facff  (subtle highlights, badges)
+  Teal/cyan:              #7fe3f0  (checkmarks, success states, pricing)
+
+WARM ACCENT
+  Coral/salmon:           #ff9b90  (emotional warmth — testimonials, family ads, before/after)
+
+LIGHT BACKGROUNDS (feed ads, review cards, claim-led)
+  Near-white:             #f4f6fa  (preferred light bg — slightly cool)
+  Pure white:             #ffffff  (card backgrounds, text)
+  Warm beige/nude:        #e1cbbc  (aspirational lifestyle contexts)
+
+NEUTRAL TONES
+  Gray-purple:            #9c9eb9  (supporting text, subheadlines on light bg)
+  Light gray:             #d6d9e0  (dividers, borders)
+
+RECOMMENDED COMBINATIONS PER AD TYPE
+--------------------------------------
+Dark Authority / Bold Claim dark:
+  bg #2d3142 · headline #ffffff · accent #1f87fe · logo #8c80f8
+
+Comparison / US vs Them:
+  brand side #2d3142 · adversary side #4c5980 · checks #7fe3f0 · X red · logo #8c80f8
+
+Light Aspirational / Claim-led:
+  bg #f4f6fa · headline #2d3142 · CTA button #1f87fe · accent #8c80f8
+
+Review Card (Testimonial Sub-type C):
+  card #ffffff · outer bg #2d3142 · stars #1f87fe or amber · badge #7fe3f0
+
+Testimonial warm (Sub-type B):
+  bg #f4f6fa or #e1cbbc · stars amber · accent #ff9b90 · text #2d3142
+
+TYPOGRAPHY
+- Headlines: Sora, weight 700–800, tight tracking
+- Body: Inter, weight 400–500
+- Tone: Bold and clear, no jargon
+
+KEY CLAIMS (verbatim from page — use these in copy, never invent)
+- "A partir de R$0,40/dia"
+- "Médico no seu celular 24 horas"
+- "Remédio com até 80% de desconto em 27 mil farmácias"
+- "Telemedicina 24h"
+- "12 assistências"
+- "R$11,90/mês" (Plano Cuidar, per person)
+- "R$19,90/mês" (Plano Protege — most popular, 82% dos clientes)
+- "R$21,90/mês" (Plano Premium)
+- "Plano de saúde familiar custa R$800–R$2.500/mês" (competitor pain point)
+- "assine agora com 10% de desconto" (current offer)
+- "A maioria dos serviços ativa em até 24h. Cancele quando quiser, sem multa."
+
+TARGET PERSONAS
+1. Mãe de família — worries about sick kids, no health plan affordable for family
+2. MEI / Autônomo — self-employed, no employer plan, can't afford to get sick
+3. CLT sem plano — salaried worker whose small company doesn't offer benefits
+
+AD VISUAL RULES
+1. Background: #2d3142 (preferred dark) OR #f4f6fa (clean light)
+2. Accent: #1f87fe (electric blue) or #7fe3f0 (teal) for highlights, CTAs, prices
+3. Warm emotional ads: use #ff9b90 coral as secondary accent
+4. Logo: Always include "SaudApp" wordmark in #8c80f8 on dark bg; #7265e3 on light bg
+5. Product representation: Phone mockup showing app, or lifestyle photography of person
+   on phone consulting a doctor — NOT physical packaging
+6. Typography on ads: Sora for headline (bold), Inter for body
+7. Competitor/problem: red or #ff9b90 for X marks; brand accent for ✓ marks
