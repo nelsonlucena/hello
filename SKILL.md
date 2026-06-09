@@ -93,7 +93,7 @@ Include this instruction verbatim in every Gemini prompt that features a person:
 
 ## Enhanced Visual Pattern Library
 
-These patterns were extracted from `winning-statics-2.pdf` (second reference set). Apply them
+These patterns were extracted from the winning-statics PDF reference set. Apply them
 when writing briefs and Gemini prompts — they are proven compositions that convert.
 
 ### US VS THEM — two proven layouts
@@ -163,6 +163,22 @@ Tightest, highest-impact B&A composition:
 - Looks identical to a real App Store / Google Play review = maximum UGC authenticity.
 - Best for: cold audiences, skeptical buyers, high-volume social proof play.
 
+### CLAIM-LED — two distinct tones
+
+Minimal, product-forward format. The claim does all the work — no storytelling needed.
+
+**Tone A — Simple/Essential** (confidence play):
+- Light/neutral background. Product photo right or centered. Very short 3-word claim left:
+  "SIMPLE. EFFECTIVE. ESSENTIAL." — periods between each word for rhythm and impact.
+- Small body line below (1 sentence). Solid CTA button. Negative space is intentional.
+- Best for: everyday-use products, supplements, apps — "the obvious choice" positioning.
+
+**Tone B — Clinical/Proof** (authority play):
+- Bold large type left (4–6 lines, each line 2–4 words): "CLINICALLY PROVEN TO / VISIBLY REDUCE /
+  FINE LINES / IN 7 DAYS". Specific timeframe or stat always present.
+- Product photo right. Minimal background (white or light neutral). "SHOP NOW" button.
+- Best for: health, beauty, SaaS — "science backs this" positioning.
+
 ### OFFER — promo urgency variant
 
 **Flash sale layout**: Bright contrasting background (brand accent or yellow). Large "% OFF" or
@@ -202,24 +218,20 @@ Run a Python extraction script using PyMuPDF (`import fitz`).
 
 ### Known PDF facts (pre-analysed — use directly)
 
-- **Heading font**: `Poppins-Bold @ 18pt`
-- **10 frameworks** across 5 pages (2 per page), ~2 example ads each:
+- **Heading font**: auto-detected by the extraction script (clean sans-serif, ~18pt bold)
+- **6 frameworks** across 2 pages, ~2–3 example ads each:
 
-  | Framework           | Slug                  | Page | Psychology                                   |
-  |---------------------|-----------------------|------|----------------------------------------------|
-  | US VS THEM          | us_vs_them            |  1   | Split contrast, checkmarks vs X              |
-  | BOLD CLAIM          | bold_claim            |  1   | Hero product + single bold result claim      |
-  | iPhone NOTES        | iphone_notes          |  2   | Fake iOS Notes screenshot listing benefits   |
-  | Features & Benefits | features_and_benefits |  2   | Clean feature list, product-forward          |
-  | Before & After      | before_and_after      |  3   | Transformation teaser, curiosity gap         |
-  | OFFER               | offer                 |  3   | Product grid + subscribe/save CTA            |
-  | TESTIMONIAL         | testimonial           |  4   | Customer photo + 5-star quote holding product|
-  | QUESTION            | question              |  4   | Problem headline, spoke-wheel benefit layout |
-  | Reasons Why…        | reasons_why           |  5   | Numbered reasons anchored to a pain point    |
-  | Sticky Notes        | sticky_notes          |  5   | Unboxing photo + handwritten sticky overlays |
+  | Framework           | Slug                  | Page | Psychology                                        |
+  |---------------------|-----------------------|------|---------------------------------------------------|
+  | Us vs Them          | us_vs_them            |  1   | Split contrast, checkmarks vs X                   |
+  | Bold Claim          | bold_claim            |  1   | Hero product + single bold result claim           |
+  | Features and Benefits | features_and_benefits | 1  | Spoke-wheel ingredients / "What's Inside" list    |
+  | Promotion           | promotion             | 1–2  | Flash sale, discount code, buy-more-get-more CTA  |
+  | Testimonials        | testimonials          |  2   | Dark Authority / Light Aspirational / Review Card |
+  | Claim-led           | claim_led             |  2   | Product photo + short authoritative claim + CTA   |
 
-- **Skip banner**: Page 1 img1 (1460×752) — wide header. Skip if width > 1.5× height AND width > 1200px.
-- **Skip decorative icon**: Page 1 img6 (blue speech bubble). Skip if image is < 50KB and near-monochrome.
+- **Skip banner**: Skip if width > 1.5× height AND width > 1200px.
+- **Skip decorative icon**: Skip if image is < 50KB and near-monochrome.
 
 ### Python extraction script
 
@@ -328,22 +340,18 @@ Use `AskUserQuestion` to ask **all four questions**. Always required.
 > "How many variations per concept? (Usually 2 — same framework, one axis changes per variation.)"
 
 **Question d** — Per-framework split
-Show the 10 frameworks, then ask:
+Show the 6 frameworks, then ask:
 ```
 Frameworks in your PDF:
-  1. US VS THEM          — split comparison, checkmarks vs X
-  2. BOLD CLAIM          — hero product + single bold result claim
-  3. iPhone NOTES        — fake iOS Notes screenshot listing benefits
-  4. Features & Benefits — clean feature list, product-forward
-  5. Before & After      — transformation teaser, curiosity gap
-  6. OFFER               — product grid + subscribe/save CTA
-  7. TESTIMONIAL         — customer photo + 5-star quote
-  8. QUESTION            — problem headline + spoke-wheel benefits
-  9. Reasons Why…        — numbered reasons anchored to a pain point
- 10. Sticky Notes        — unboxing photo + handwritten sticky note overlays
+  1. Us vs Them          — split comparison, checkmarks vs X
+  2. Bold Claim          — hero product + single bold result claim
+  3. Features & Benefits — spoke-wheel or "What's Inside" feature list
+  4. Promotion           — flash sale, discount code, buy-more-get-more
+  5. Testimonials        — Dark Authority / Light Aspirational / Review Card
+  6. Claim-led           — product photo + short authoritative claim + CTA
 
 How many images of each? Say 'even split' or give counts like
-'20 US VS THEM, 10 BOLD CLAIM, 10 Before & After, 10 TESTIMONIAL'.
+'10 Us vs Them, 10 Bold Claim, 10 Testimonials, 10 Claim-led'.
 Counts must sum to [total_images].
 ```
 
