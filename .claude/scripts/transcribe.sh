@@ -6,14 +6,23 @@
 set -euo pipefail
 
 INPUT="${1:-}"
-API_KEY="${ASSEMBLYAI_API_KEY:-}"
 BASE_URL="https://api.assemblyai.com/v2"
+
+# Load from .claude/.env if key not already in environment
+ENV_FILE="$(git rev-parse --show-toplevel 2>/dev/null)/.claude/.env"
+if [[ -z "${ASSEMBLYAI_API_KEY:-}" && -f "$ENV_FILE" ]]; then
+  source "$ENV_FILE"
+fi
+
+API_KEY="${ASSEMBLYAI_API_KEY:-}"
 
 # ── Guards ────────────────────────────────────────────────────────────────────
 
 if [[ -z "$API_KEY" ]]; then
   echo "ERROR: ASSEMBLYAI_API_KEY is not set." >&2
-  echo "  Export it: export ASSEMBLYAI_API_KEY=your_key_here" >&2
+  echo "  Either:" >&2
+  echo "    1. Create .claude/.env with: ASSEMBLYAI_API_KEY=your_key" >&2
+  echo "    2. Or export it in your shell before running" >&2
   exit 1
 fi
 
