@@ -1,0 +1,135 @@
+{
+  "deck_name": "COG Transformation",
+  "slides": [
+    {
+      "type": "cover",
+      "confidential_label": "Internal Memorandum — Confidential",
+      "memo": { "to": "Sesh Iyer", "from": "Head of Operations & Transformation, COG", "date": "May 29, 2026" },
+      "eyebrow": "Biweekly Transformation Update",
+      "title": [
+        [ "COG Transformation ", { "text": "Program", "italic": true } ],
+        [ "Status across three programs" ]
+      ],
+      "subtitle": "Auto Mexico, Auto Thailand, and Consumer Partnerships — where each stands this cycle, the risks in play, and the four decisions required from you.",
+      "stat_cards": [
+        {
+          "label": "Auto Mexico", "status": "ON TRACK", "number": "139", "unit": "FTE",
+          "body": [ [ "FY2026 reduction goal — locked. ", { "text": "37", "bold": true }, " delivered YTD, confirmed by Q2." ] ]
+        },
+        {
+          "label": "Auto Thailand", "status": "AT RISK", "number": "", "unit": "",
+          "body": [ [ { "text": "CMX & One Hub / Duck Creek", "bold": true } ], [ "Full implementation — FY2026 goal. Red flags on rollout detail & PM structure." ] ]
+        },
+        {
+          "label": "Consumer Partnerships", "status": "ON TRACK", "number": "45", "unit": "FTE",
+          "body": [ [ "FY2026 reduction goal. Four workstreams in active motion." ] ]
+        }
+      ]
+    },
+    {
+      "type": "progress",
+      "breadcrumb": [ "Progress · 01", { "text": "Auto Mexico", "accent": true } ],
+      "title": [ [ "The most advanced program, ", { "text": "delivering against plan", "italic": true } ] ],
+      "stats": [
+        { "number": "139", "unit": "", "caption_bold": "FY2026 FTE goal — locked.", "caption": "Potential to pull Q4 deliverables forward." },
+        { "number": "37", "unit": "", "caption_bold": "Delivered YTD,", "caption": "confirmed by Q2." },
+        { "number": "105", "unit": "", "caption_bold": "Claims FTE", "caption": "driven by three enablers running concurrently." }
+      ],
+      "columns": [
+        {
+          "heading": "Claims — the 105 FTE, three enablers",
+          "bullets": [
+            [ { "text": "58 FTE", "bold": true }, " — Audatex utilization removes rekeying, plus automated body-shop estimate approvals and BDEO cash-out automation." ],
+            [ { "text": "26 FTE", "bold": true }, " — Audatex InParts auto-sources parts; realization confirmed after next week's Claims-leader review." ],
+            [ { "text": "21 FTE", "bold": true }, " — Total-loss vehicles routed directly to Ventura at the scene. Only ", { "text": "25%", "bold": true }, " of eligible vehicles follow this path today." ]
+          ]
+        },
+        {
+          "heading": "Claims NPS — two tracked scores",
+          "inline_stats": [
+            { "number": "60", "label": "FNOL\nFirst Contact" },
+            { "number": "29", "label": "Post-Repair\nCompletion", "color": "oxblood" }
+          ],
+          "body": [ [ "The low post-repair figure is driven primarily by ", { "text": "parts wait time in total-loss cases. Polaris", "bold": true }, " — LLM-agnostic, on Chubb data, internally controlled — was presented to IT, Claims & Business; deep-dive confirmed as next step." ] ]
+        }
+      ]
+    },
+    {
+      "type": "two_column",
+      "breadcrumb": [ "Progress · 02", { "text": "Auto Thailand & Consumer Partnerships", "accent": true } ],
+      "title": [ [ "Momentum building behind the ", { "text": "lead program", "italic": true } ] ],
+      "columns": [
+        {
+          "name": "Auto Thailand", "status": "AT RISK",
+          "subtitle": "QC Automation on track despite program-level flags",
+          "number": "32", "unit": "FTE",
+          "lead": "delivering this quarter from QC Automation; remaining 13 targeted for Q4.",
+          "bullets": [
+            [ "Model evaluates ", { "text": "42 factors", "bold": true }, " within a sales call; new insights require reweighting — and feed ", { "text": "Script Optimization.", "bold": true } ],
+            [ "Claims surfaced two opportunities: high ", { "text": "FNOL call abandonment", "bold": true }, " & two-hour dispatch, plus a ", { "text": "pago de daños", "bold": true }, " damage-assessment model mirroring Mexico." ]
+          ]
+        },
+        {
+          "name": "Consumer Partnerships", "status": "ON TRACK",
+          "subtitle": "Four workstreams in active motion",
+          "number": "4", "unit": "",
+          "lead": "workstreams live — the portfolio's most significant forward agenda.",
+          "bullets": [
+            [ { "text": "P&L expense analysis", "bold": true }, " initiated to inform admin-ratio reduction." ],
+            [ { "text": "Catalyst consolidation", "bold": true }, " workshop planned — regional migration & standardized operating model." ],
+            [ { "text": "Consumer Claims STP", "bold": true }, " — LATAM build by September; Nubank (Life) the first expected client." ],
+            [ { "text": "Engage+", "bold": true }, " contact-center & Claims integration in progress." ]
+          ]
+        }
+      ]
+    },
+    {
+      "type": "risks",
+      "breadcrumb": [ "Section III", { "text": "Risks", "accent": true } ],
+      "title": [ [ "Two exposures — each gated on a decision ", { "text": "next week", "italic": true } ] ],
+      "cards": [
+        {
+          "label": "Auto Thailand", "status": "PROGRAM-LEVEL",
+          "title": [ [ "Under-specified ", { "text": "CMX rollout", "italic": true } ] ],
+          "body": [ [ "Red flags on the One Hub / Duck Creek rollout to agents — ", { "text": "insufficient detail and weak project-management structure.", "bold": true }, " An agenda review with Paul McNamee, John Thompson & Gordon is proposed, pending Thailand's CMX update. Executing against an under-specified plan only compounds the recovery effort later." ] ],
+          "gate": "Thailand's CMX status update, then a structured program review."
+        },
+        {
+          "label": "Auto Mexico", "status": "EXECUTION",
+          "title": [ [ "Premature ", { "text": "Total-Loss cutover", "italic": true } ] ],
+          "body": [ [ "Activating direct-to-Ventura routing before Ventura confirms a capacity & ramp plan risks fallbacks that ", { "text": "damage client experience and partner relations", "bold": true }, " — exactly as the program is proving Claims value. A post-repair NPS of ", { "text": "29", "bold": true }, " leaves no margin for a self-inflicted setback on the same issue." ] ],
+          "gate": "A concrete written ramp plan from Ventura — not a verbal commitment."
+        }
+      ]
+    },
+    {
+      "type": "decisions_dark",
+      "breadcrumb": [ "Section IV", { "text": "Decisions Required", "accent": true } ],
+      "title": [ [ "Four asks of you ", { "text": "this cycle", "italic": true } ] ],
+      "items": [
+        {
+          "number": "1", "title": "Thailand program review",
+          "body": "Direct Thailand to submit their CMX update within five business days; on receipt, confirm a review with Paul McNamee, John Thompson & Gordon and judge whether a formal reset is required.",
+          "cta": "Set the deadline"
+        },
+        {
+          "number": "2", "title": "Ventura readiness gate",
+          "body": "No Total-Loss routing cutover until Ventura confirms a capacity & ramp plan. Confirm the gate explicitly so execution pressure doesn't move the change ahead of partner readiness.",
+          "cta": "Confirm the gate"
+        },
+        {
+          "number": "3", "title": "Consumer into Vera & stand-up",
+          "body": "Incorporate Consumer into Vera and the weekly stand-up alongside Mexico & Thailand — today its largest forward workstream is invisible in the planning tool.",
+          "cta": "Direct as immediate correction"
+        },
+        {
+          "number": "4", "title": "QC factor reweighting",
+          "body": "Complete and validate the 42-factor reweighting before Script Optimization advances — so the dependency is managed explicitly, not by default.",
+          "cta": "Confirm sequencing"
+        }
+      ],
+      "footer_left": "COG Operations & Transformation — Confidential",
+      "footer_right": "May 29, 2026"
+    }
+  ]
+}
